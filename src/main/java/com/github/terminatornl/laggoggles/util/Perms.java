@@ -14,6 +14,7 @@ import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.UUID;
 
 public class Perms {
@@ -29,12 +30,7 @@ public class Perms {
     }
 
     public static Permission getPermission(EntityPlayer p){
-        boolean hasPermission = false;
-        for(int i = 0; i < ServerConfig.FULL_PERMISSION_LIST.length; i++) {
-            if(ServerConfig.FULL_PERMISSION_LIST[i].equals(p.getGameProfile().getName())) {
-                hasPermission = true;
-            }
-        }
+        boolean hasPermission = Arrays.stream(ServerConfig.FULL_PERMISSION_LIST).anyMatch(s -> s.equals(p.getGameProfile().getName()));
 
         if(hasPermission
                 || FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getOppedPlayers().getPermissionLevel(p.getGameProfile()) > 0

@@ -16,7 +16,7 @@ repositories {
 }
 
 apply plugin: 'net.minecraftforge.gradle'
-String LagGogglesVersion = "1.12.2-5.9"
+String LagGogglesVersion = "1.12.2-5.9-GM"
 
 ext.GetCommitCount = { ->
     def stdout = new ByteArrayOutputStream()
