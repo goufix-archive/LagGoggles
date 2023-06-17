@@ -1,5 +1,6 @@
 package com.github.terminatornl.laggoggles.util;
 
+import com.github.terminatornl.laggoggles.Main;
 import com.github.terminatornl.laggoggles.packet.ObjectData;
 import com.github.terminatornl.laggoggles.profiler.ProfileResult;
 import com.github.terminatornl.laggoggles.server.RequestDataHandler;
@@ -28,7 +29,20 @@ public class Perms {
     }
 
     public static Permission getPermission(EntityPlayer p){
+        boolean hasPermission = false;
+        for(int i = 0; i < ServerConfig.FULL_PERMISSION_LIST.length; i++) {
+            if(ServerConfig.FULL_PERMISSION_LIST[i].equals(p.getGameProfile().getName())) {
+                hasPermission = true;
+            }
+        }
+
+        if(hasPermission
+                || FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getOppedPlayers().getPermissionLevel(p.getGameProfile()) > 0
+                || !FMLCommonHandler.instance().getMinecraftServerInstance().isDedicatedServer()) {
             return Permission.FULL;
+        }else{
+            return ServerConfig.NON_OP_PERMISSION_LEVEL;
+        }
     }
 
     public static boolean hasPermission(EntityPlayer player, Permission permission){

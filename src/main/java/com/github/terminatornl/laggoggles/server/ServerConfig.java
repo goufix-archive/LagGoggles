@@ -14,6 +14,8 @@ import java.io.File;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -27,7 +29,7 @@ public class ServerConfig {
                     "   'GET'   Allow getting the latest scan result, this will be stripped down to the player's surroundings\n" +
                     "   'START' Allow starting the profiler\n" +
                     "   'FULL'  All permissions are granted, teleporting to entities, blocks")
-    public static Perms.Permission NON_OP_PERMISSION_LEVEL = Perms.Permission.START;
+    public static Perms.Permission NON_OP_PERMISSION_LEVEL = Perms.Permission.NONE;
 
     @Config.Comment("Allow normal users to see event subscribers?")
     public static boolean ALLOW_NON_OPS_TO_SEE_EVENT_SUBSCRIBERS = false;
@@ -50,6 +52,9 @@ public class ServerConfig {
 
     @Config.Comment("How often can normal users request the latest scan result in seconds?")
     public static int NON_OPS_REQUEST_LAST_SCAN_DATA_TIMEOUT = 30;
+
+    @Config.Comment("Players that has the full permission without op")
+    public static String[] FULL_PERMISSION_LIST = {};
 
     @Mod.EventBusSubscriber
     public static class ConfigurationHolder {
