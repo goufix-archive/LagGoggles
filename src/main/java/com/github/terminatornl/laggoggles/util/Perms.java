@@ -28,11 +28,7 @@ public class Perms {
     }
 
     public static Permission getPermission(EntityPlayer p){
-        if(FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getOppedPlayers().getPermissionLevel(p.getGameProfile()) > 0 || FMLCommonHandler.instance().getMinecraftServerInstance().isDedicatedServer() == false) {
             return Permission.FULL;
-        }else{
-            return ServerConfig.NON_OP_PERMISSION_LEVEL;
-        }
     }
 
     public static boolean hasPermission(EntityPlayer player, Permission permission){
